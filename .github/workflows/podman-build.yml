@@ -41,10 +41,16 @@ jobs:
       name: Build the Docker image
       run: |
         NEW_VERSION=$(git ls-remote --tags "https://github.com/Readarr/Readarr/" | cut -d/ -f3- | tail -n1 | tr -d '^{}')
+        echo "NEW_VERSION START"
+        echo $NEW_VERSION
+        echo "NEW_VERSION STOP"
         if [ $CUR_VERSION != $NEW_VERSION ]; then
           #docker build . --file Dockerfile --tag nicksica/$PROJECT_NAME:latest
           #docker push nicksica/$PROJECT_NAME:latest
           echo CUR_VERSION=$NEW_VERSION > ./version.var
+          echo "FILE START"
+          cat varsion.var
+          echo "FILE STOP"
           git config --global user.name $GIT_USERNAME
           git config --global user.email $GIT_EMAIL
           git status
