@@ -50,7 +50,7 @@ jobs:
           echo CUR_VERSION=$NEW_VERSION > ./version.var
           ls -al
           echo "FILE START"
-          cat varsion.var
+          cat version.var
           echo "FILE STOP"
           git config --global user.name $GIT_USERNAME
           git config --global user.email $GIT_EMAIL
