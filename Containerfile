@@ -12,6 +12,7 @@ RUN mv Readarr /opt/
 ENV XDG_CONFIG_HOME=/config/xdg
 #WORKDIR /config
 
-CMD /opt/Readarr/Readarr -data=/config
+ENTRYPOINT /opt/Readarr/Readarr
+CMD -data=/config
 EXPOSE 8787
 VOLUME /config
