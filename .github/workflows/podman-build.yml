@@ -56,9 +56,11 @@ jobs:
           echo "FILE START"
           cat version.var
           echo "FILE STOP"
-          git config --global user.name $GIT_USERNAME
-          git config --global user.email $GIT_EMAIL
+          git config --global user.name ${{ secrets.GIT_USERNAME }}
+          git config --global user.email ${{ secrets.GIT_EMAIL }}
+          echo "WE ARE HERE"
           git status
+          echo "NO WE ARE HERE"
           git add ./version.var
           git commit -m "Update version number"
           git push
