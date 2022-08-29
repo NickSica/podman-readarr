@@ -51,7 +51,7 @@ jobs:
       name: Buildah Action
       id: build-image
       uses: redhat-actions/buildah-build@v2
-      if: $CUR_VERSION != $NEW_VERSION
+      if: ${{ env.CUR_VERSION }} != ${{ env.NEW_VERSION }}
       with:
         image: ${{ env.IMAGE_NAME }}
         tags: latest ${{ github.sha }}
@@ -59,9 +59,9 @@ jobs:
           ./Containerfile
     -
       name: Push version number
-      if: $CUR_VERSION != $NEW_VERSION
+      if: ${{ env.CUR_VERSION }} != ${{ env.NEW_VERSION }}
       run: |
-        echo CUR_VERSION=$NEW_VERSION > ./.github/variables/version.var
+        echo CUR_VERSION=${{ env.NEW_VERSION }} > ./.github/variables/version.var
         git config --global user.name ${{ secrets.GIT_USERNAME }}
         git config --global user.email ${{ secrets.GIT_EMAIL }}
         git add ./.github/variables/version.var
