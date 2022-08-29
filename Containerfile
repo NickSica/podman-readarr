@@ -10,7 +10,7 @@ RUN tar -xvzf Readarr*.linux*.tar.gz
 RUN mv Readarr /opt/
 
 ENV XDG_CONFIG_HOME=/config/xdg
-WORKDIR /config
+#WORKDIR /config
 
 CMD /opt/Readarr/Readarr -data=/config
 EXPOSE 8787
