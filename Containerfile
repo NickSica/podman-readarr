@@ -1,7 +1,9 @@
 FROM ubuntu:latest
 SHELL ["/bin/bash", "-c"]
 
-RUN apt-get update && \
+RUN \
+    echo "**** install packages ****" && \
+    apt-get update && \
     apt-get install -y libicu-dev && \
     apt-get install -y wget curl sqlite3
 RUN cd tmp && \
