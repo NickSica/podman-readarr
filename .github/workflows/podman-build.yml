@@ -54,7 +54,7 @@ jobs:
           echo "VERSION FILE START"
           cat ./.github/variables/version.var
           echo "VERSION FILE STOP"
-          #git add ./.github/variables/version.var
-          #git commit -m "Update version number"
-          #git push
+          git add ./.github/variables/version.var
+          git commit -m "Update version number"
+          git push
         fi
