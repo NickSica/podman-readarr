@@ -40,20 +40,13 @@ jobs:
     - 
       name: Build the Docker image
       run: |
-        echo "CURRENT VERSION OUTPUT START"
-        echo $CUR_VERSION
-        echo "CURRENT VERSION OUTPUT STOP"
         NEW_VERSION=$(git ls-remote --tags "https://github.com/Readarr/Readarr/" | cut -d/ -f3- | tail -n1 | tr -d '^{}')
-        echo "NEW VERSION OUTPUT START"
-        echo $NEW_VERSION
-        echo "NEW VERSION OUTPUT STOP"
         if [ $CUR_VERSION != $NEW_VERSION ]; then
-          docker build . --file Dockerfile --tag nicksica/$PROJECT_NAME:latest
-          docker push nicksica/$PROJECT_NAME:latest
+          #docker build . --file Dockerfile --tag nicksica/$PROJECT_NAME:latest
+          #docker push nicksica/$PROJECT_NAME:latest
           echo CUR_VERSION=$NEW_VERSION > ./.github/variables/version.var
-          echo "VERSION FILE START"
-          cat ./.github/variables/version.var
-          echo "VERSION FILE STOP"
+          git config --global user.name $GIT_USERNAME
+          git config --global user.email $GIT_EMAIL
           git add ./.github/variables/version.var
           git commit -m "Update version number"
           git push
