@@ -46,6 +46,7 @@ jobs:
       name: Get version
       run: |
         NEW_VERSION=$(git ls-remote --tags "https://github.com/Readarr/Readarr/" | cut -d/ -f3- | tail -n1 | tr -d '^{}')
+        echo NEW_VERSION=$NEW_VERSION >> $GITHUB_ENV
     - 
       name: Buildah Action
       id: build-image
