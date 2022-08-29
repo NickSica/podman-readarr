@@ -57,7 +57,7 @@ jobs:
     -
       name: Push to Docker Hub
       id: push-to-docker
-      if: ${{ env.CUR_VERSION }} != ${{ env.NEW_VERSION }}
+      if: env.CUR_VERSION != env.NEW_VERSION
       uses: redhat-actions/push-to-registry@v2
       with:
         image: ${{ steps.build-image.outputs.image }}
@@ -65,7 +65,7 @@ jobs:
         registry: docker.io/${{ secrets.DOCKER_HUB_USERNAME }}
     -
       name: Push version number
-      if: ${{ env.CUR_VERSION }} != ${{ env.NEW_VERSION }}
+      if: env.CUR_VERSION != env.NEW_VERSION
       run: |
         echo CUR_VERSION=${{ env.NEW_VERSION }} > ./.github/variables/version.var
         git config --global user.name ${{ secrets.GIT_USERNAME }}
