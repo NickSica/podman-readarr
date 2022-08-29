@@ -29,13 +29,6 @@ jobs:
         fetch-depth: 0
         ref: ${{ github.event.pull_request.head.ref }}
     -
-      name: Login to Docker Hub
-      uses: redhat-actions/podman-login@v1
-      with:
-        registry: docker.io
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-    -
       name: Set variables
       run: |
         sed "" ./.github/variables/version.var >> $GITHUB_ENV
@@ -44,6 +37,14 @@ jobs:
       run: |
         NEW_VERSION=$(git ls-remote --tags "https://github.com/Readarr/Readarr/" | cut -d/ -f3- | tail -n1 | tr -d '^{}')
         echo NEW_VERSION=$NEW_VERSION >> $GITHUB_ENV
+    -
+      name: Login to Docker Hub
+      if: env.CUR_VERSION != env.NEW_VERSION
+      uses: redhat-actions/podman-login@v1
+      with:
+        registry: docker.io
+        username: ${{ secrets.DOCKER_HUB_USERNAME }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     - 
       name: Buildah Action
       id: build-image
