@@ -58,6 +58,15 @@ jobs:
         containerfiles: |
           ./Containerfile
     -
+      name: Push to Docker Hub
+      id: push-to-docker
+      uses: redhat-actions/push-to-registry@v2
+      if: ${{ env.CUR_VERSION }} != ${{ env.NEW_VERSION }}
+      with:
+        image: ${{ steps.build-image.outputs.image }}
+        tags: ${{ steps.build-image.outputs.tags }}
+        registry: docker.io/${{ secrets.DOCKER_HUB_USERNAME }}
+    -
       name: Push version number
       if: ${{ env.CUR_VERSION }} != ${{ env.NEW_VERSION }}
       run: |
@@ -67,11 +76,4 @@ jobs:
         git add ./.github/variables/version.var
         git commit -m "Update version number"
         git push
-    -
-      name: Push to Docker Hub
-      id: push-to-docker
-      uses: redhat-actions/push-to-registry@v2
-      with:
-        image: ${{ steps.build-image.outputs.image }}
-        tags: ${{ steps.build-image.outputs.tags }}
-        registry: docker.io
+    
