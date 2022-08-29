@@ -26,7 +26,6 @@ jobs:
         sed "" ./.github/variables/version.var >> $GITHUB_ENV
         NEW_VERSION=$(git ls-remote --tags "https://github.com/Readarr/Readarr/" | cut -d/ -f3- | tail -n1 | tr -d '^{}')
         if [ $CUR_VERSION != $NEW_VERSION ]; then
-          ls -al
           docker build . --file Dockerfile --tag nicksica/$PROJECT_NAME:latest
           docker push nicksica/$PROJECT_NAME:latest
           echo CUR_VERSION=$NEW_VERSION > ./github/variables/version.var
