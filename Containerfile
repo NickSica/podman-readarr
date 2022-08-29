@@ -7,7 +7,7 @@ RUN apt-get update && \
 RUN cd tmp && \
     wget --content-disposition 'http://readarr.servarr.com/v1/update/develop/updatefile?os=linux&runtime=netcore&arch=x64' && \
     tar -xvzf Readarr*.linux*.tar.gz && \
-    mv Readarr /opt/ && \
+    mv Readarr /opt/
 
 ENV XDG_CONFIG_HOME=/config/xdg
 #WORKDIR /config
