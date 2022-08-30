@@ -11,10 +11,8 @@ RUN cd tmp && \
     tar -xvzf Readarr*.linux*.tar.gz && \
     mv Readarr /opt/
 
-ENV XDG_CONFIG_HOME=/config/xdg
-#WORKDIR /config
+ENV XDG_CONFIG_HOME=/config
 
-ENTRYPOINT /opt/Readarr/Readarr
-CMD -data=/config
+ENTRYPOINT /opt/Readarr/Readarr -data=/config
 EXPOSE 8787
 VOLUME /config
